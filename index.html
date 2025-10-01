@@ -75,7 +75,7 @@
     <h1>Bookmarklet Tools</h1>
 
     <p style="font-size: 24px;">To use any of the bookmarklets below, simply <span style="font-weight: bold;"> drag the
-            <span style="color:#4CAF50">DRAG ME 🡥</span> button to your bookmarks bar.</span></p>
+            <span style="color:#4CAF50;font-size:21px;">DRAG ME 🡥</span> button to your bookmarks bar.</span></p>
     <p>Then, when you are on a webpage, click the bookmarklet in your bookmarks bar to activate it.</p>
 
     <div class="bookmarklets">
@@ -140,7 +140,7 @@
 
         <div class="bookmarklet">
             <h2>Link Highlighter (Internal/External)</h2>
-            <p>Highlights all the <a> links on the current page (Internal = Green, External = Red).</p>
+            <p>Highlights all the links on the current page (Internal = Green, External = Red).</p>
             <p>This helps you instantly see which links point off-site vs stay on the same domain.</p>
             <a
                 href="javascript:(function(){var domain=location.hostname.replace(/^www\./,&quot;&quot;);var links=document.querySelectorAll(&quot;a[href]&quot;);links.forEach(function(a){if(a.hostname.replace(/^www\./,&quot;&quot;)==domain){a.style.backgroundColor=&quot;#c8f7c5&quot;;a.style.border=&quot;1px solid #2ecc71&quot;;}else{a.style.backgroundColor=&quot;#f7c5c5&quot;;a.style.border=&quot;1px solid #e74c3c&quot;;}});alert(&quot;Highlighted &quot;+links.length+&quot; links (green=internal, red=external).&quot;);})();
