@@ -15,6 +15,10 @@
          }
          h1 {
          color: #4CAF50;
+         margin-top:0px;
+         }
+         h2 {
+         margin-top: 5px;
          }
          p {
          font-size: 1.1em;
@@ -121,7 +125,6 @@
             <p>Uses the browser’s Performance API to list all resource requests (CSS, JS, images, etc.), showing both their transfer size (KB) and load time (ms).
                Also sums up total KB.
             </p>
-            <p>Useful for quick checks of page weight and heavy resources.</p>
             <a href="javascript:(function(){var entries=performance.getEntriesByType(&quot;resource&quot;);var totalSize=0;var report=&quot;Resource sizes (KB):\n\n&quot;;entries.forEach(function(e){var kb=(e.transferSize/1024).toFixed(1);totalSize+=parseFloat(kb);report+=e.name+&quot; - &quot;+kb+&quot; KB, &quot;+e.duration.toFixed(1)+&quot; ms\n&quot;;});report+=&quot;\nTotal size: &quot;+totalSize.toFixed(1)+&quot; KB&quot;;var w=window.open(&quot;&quot;,&quot;_blank&quot;);w.document.write(&quot;&lt;pre&gt;&quot;+report+&quot;&lt;/pre&gt;&quot;);})();">Page Speed Checker</a>
          </div>
          <div class="bookmarklet">
