@@ -165,7 +165,7 @@ Also sums up total KB.</p>
 
         <div class="bookmarklet">
             <h2>Schema JSON-LD checker</h2>
-            <p>Finds all <script type="application/ld+json"> blocks on the page, parses them, and pretty-prints the JSON.</p>
+            <p>Finds all JSON blocks on the page, parses them, and pretty-prints the JSON.</p>
             <p>Flags invalid JSON.</p>
             <a
                 href="javascript:(function(){var scripts=document.querySelectorAll(&quot;script[type=&#39;application/ld+json&#39;]&quot;);if(!scripts.length){alert(&quot;No JSON-LD schema found.&quot;);return;}var output=&quot;&quot;;scripts.forEach(function(s,i){try{var json=JSON.parse(s.innerText);output+=&quot;Schema block &quot;+(i+1)+&quot;:\n&quot;+JSON.stringify(json,null,2)+&quot;\n\n&quot;;}catch(e){output+=&quot;Schema block &quot;+(i+1)+&quot;: Invalid JSON\n\n&quot;;}});var w=window.open(&quot;&quot;,&quot;_blank&quot;);w.document.write(&quot;&lt;pre style=&#39;white-space:pre-wrap;&#39;&gt;&quot;+output+&quot;&lt;/pre&gt;&quot;);})();
