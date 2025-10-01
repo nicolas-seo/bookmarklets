@@ -104,7 +104,81 @@
                 href="javascript:(function(){var spans=document.querySelectorAll(&quot;span[style]&quot;);spans.forEach(function(span){span.outerHTML=span.innerHTML;});var paragraphs=document.querySelectorAll(&quot;p&quot;);var longSentences=[];var firstHighlight=null;paragraphs.forEach(function(p){var sentences=p.innerText.match(/[^.!?]*[.!?]/g);if(sentences){for(var i=0;i<sentences.length;i++){var wordCount=sentences[i].trim().split(/\s+/).length;if(wordCount>30){longSentences.push(sentences[i]);var sentenceHTML=p.innerHTML;var regex=new RegExp(sentences[i].replace(/[.*+?^${}()|[\\]\\\\]/g,&quot;\\\\$&quot;),&quot;g&quot;);p.innerHTML=sentenceHTML.replace(regex,&quot;&lt;span style='background-color:yellow;'&gt;&quot;+sentences[i]+&quot;&lt;/span&gt;&quot;);if(!firstHighlight){firstHighlight=document.querySelector(&quot;span[style*='background-color:yellow']&quot;);}}}}});if(longSentences.length>0){alert('Found '+longSentences.length+' sentences longer than 30 words.');if(firstHighlight){firstHighlight.scrollIntoView({behavior:'smooth',block:'center'});}var newWindow=window.open('','_blank');newWindow.document.write(&quot;&lt;html&gt;&lt;body&gt;&lt;div style='font-weight:bold; font-size:20px;'&gt;Long Sentences Found:&lt;/div&gt;&lt;ul&gt;&quot;);for(var i=0;i<longSentences.length;i++){newWindow.document.write(&quot;&lt;li&gt;&quot;+longSentences[i]+&quot;&lt;/li&gt;&quot;);}newWindow.document.write(&quot;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;&quot;);newWindow.document.close();}else{alert('No sentences longer than 30 words found.');}})();">DRAG ME 🡥</a>
         </div>
 
+        <div class="bookmarklet">
+            <h2>Paragraph Checker</h2>
+            <p>Finds <b>paragraphs longer than 150 words</b>, highlights them, and scrolls to the first one it
+                finds.</p>
+            <a
+                href="javascript:(function(){var previousHighlights=document.querySelectorAll(&quot;span[style*=&#39;background-color:yellow&#39;]&quot;);previousHighlights.forEach(function(span){span.outerHTML=span.innerHTML;});var paragraphs=document.getElementsByTagName(&quot;p&quot;);var foundLongParagraph=false;for(var i=0;i&lt;paragraphs.length;i++){var paragraphText=paragraphs[i].innerText||paragraphs[i].textContent;var wordCount=paragraphText.trim().split(/\s+/).length;if(wordCount&gt;150){foundLongParagraph=true;paragraphs[i].style.backgroundColor=&#39;yellow&#39;;paragraphs[i].scrollIntoView({behavior:&#39;smooth&#39;,block:&#39;center&#39;});alert(&#39;A paragraph longer than 150 words has been highlighted. It contains &#39;+wordCount+&#39; words.&#39;);break;}}if(!foundLongParagraph){alert(&#39;No paragraphs longer than 150 words found.&#39;);}})();">DRAG ME 🡥</a>
+        </div>
 
+        <div class="bookmarklet">
+            <h2>Header Checker</h2>
+            <p>Finds all <b>headings</b> (`h1` to `h6`) on the page and opens a new tab listing them in order
+                as they appear on the page.</p>
+            <a
+                href="javascript:(function(){let e=document.querySelectorAll('h1,h2,h3,h4,h5,h6'),t='';e.forEach(function(e){t+=e.tagName+': '+e.textContent.trim()+'<br>';});let n=window.open('','_blank');n.document.write('<html><body>'+(t||'No headings found on this page.')+'</body></html>');n.document.close();})();">DRAG ME 🡥</a>
+        </div>
+
+        <div class="bookmarklet">
+            <h2>Header Sequence Checker</h2>
+            <p>Checks all <b>headings</b> (h1 to h6) on the page, highlights any <b>out of sequence</b> in red, and
+                scrolls to the first mistake while reporting the total errors found.</p>
+            <a
+                href="javascript:(function(){let headers=document.querySelectorAll(&quot;h1,h2,h3,h4,h5,h6&quot;),correctSequence=[&quot;H1&quot;,&quot;H2&quot;,&quot;H3&quot;,&quot;H4&quot;,&quot;H5&quot;,&quot;H6&quot;],prevIndex=0,isOutOfOrder=false,errorCount=0,firstErrorHeader=null;headers.forEach(header=&gt;{let currentIndex=correctSequence.indexOf(header.tagName);if(currentIndex&gt;prevIndex+1){isOutOfOrder=true;errorCount++;header.style.color=&quot;red&quot;;header.style.backgroundColor=&quot;yellow&quot;;header.innerHTML+=` &lt;span style=&quot;color:red;font-weight:bold;&quot;&gt;(Error: ${correctSequence[prevIndex]} followed by ${header.tagName})&lt;/span&gt;`;if(!firstErrorHeader){firstErrorHeader=header}}prevIndex=(currentIndex&lt;=prevIndex||currentIndex===prevIndex+1)?currentIndex:prevIndex});if(isOutOfOrder){if(firstErrorHeader){firstErrorHeader.scrollIntoView({behavior:&quot;smooth&quot;});alert(`Found ${errorCount} heading sequence mistakes.`)}}else{alert(&quot;All headers are in the correct sequence.&quot;)}})();">DRAG ME 🡥</a>
+        </div>
+
+        <div class="bookmarklet">
+            <h2>Capitalization Checker</h2>
+            <p>Checks all <b>headings</b> (h1 to h6) on the page, highlights <b>incorrect capitalization</b> in
+                yellow,
+                and scrolls to the first mistake while showing the corrected version.</p>
+            <p>NOTE: Do double check the corrected version as it might be inaccurate (ex. vs > Vs) </p>
+            <a
+                href="javascript:(function(){const lowercaseWords=[&quot;a&quot;,&quot;an&quot;,&quot;and&quot;,&quot;as&quot;,&quot;at&quot;,&quot;but&quot;,&quot;by&quot;,&quot;for&quot;,&quot;if&quot;,&quot;in&quot;,&quot;nor&quot;,&quot;of&quot;,&quot;on&quot;,&quot;or&quot;,&quot;so&quot;,&quot;the&quot;,&quot;to&quot;,&quot;up&quot;,&quot;yet&quot;];function isIgnoredWord(word){return /[A-Z].*[A-Z]/.test(word);}function toTitleCase(text){return text.split(&#39; &#39;).map((word,index,words)=&gt;{if(isIgnoredWord(word)){return word;}if(index===0||index===words.length-1||word.length&gt;=4||!lowercaseWords.includes(word.toLowerCase())){return word.charAt(0).toUpperCase()+word.slice(1).toLowerCase();}return word.toLowerCase();}).join(&#39; &#39;);}const headers=document.querySelectorAll(&quot;h1,h2,h3,h4,h5,h6&quot;);let firstIncorrectHeader=null;let incorrectCount=0;headers.forEach(header=&gt;{const originalText=header.innerText.trim();const titleCasedText=toTitleCase(originalText);if(originalText!==titleCasedText){header.style.backgroundColor=&quot;yellow&quot;;header.innerHTML=originalText+` &lt;span style=&quot;color:red;font-weight:bold;&quot;&gt;(Correction: ${titleCasedText})&lt;/span&gt;`;if(!firstIncorrectHeader){firstIncorrectHeader=header;}incorrectCount++;}});if(incorrectCount&gt;0){if(firstIncorrectHeader){firstIncorrectHeader.scrollIntoView({behavior:&quot;smooth&quot;,block:&quot;center&quot;});}alert(`Found ${incorrectCount} header(s) with incorrect capitalization.`);}else{alert(&quot;All headers are correctly capitalized.&quot;);}})();">DRAG ME 🡥</a>
+        </div>
+
+        <div class="bookmarklet">
+            <h2>Link Highlighter (Internal/External)</h2>
+            <p>Highlights all the <a> links on the current page (Internal = Green, External = Red).</p>
+            <p>This helps you instantly see which links point off-site vs stay on the same domain.</p>
+            <a
+                href="javascript:(function(){var domain=location.hostname.replace(/^www\./,&quot;&quot;);var links=document.querySelectorAll(&quot;a[href]&quot;);links.forEach(function(a){if(a.hostname.replace(/^www\./,&quot;&quot;)==domain){a.style.backgroundColor=&quot;#c8f7c5&quot;;a.style.border=&quot;1px solid #2ecc71&quot;;}else{a.style.backgroundColor=&quot;#f7c5c5&quot;;a.style.border=&quot;1px solid #e74c3c&quot;;}});alert(&quot;Highlighted &quot;+links.length+&quot; links (green=internal, red=external).&quot;);})();
+">DRAG ME 🡥</a>
+        </div>
+
+        <div class="bookmarklet">
+            <h2>Size Attribute Checker</h2>
+            <p>Check if the current page contains any images that are missing size attributes (width and/or height)</p>
+            <a
+                href="javascript:(function(){var imgs=document.querySelectorAll('img');var missing=[];imgs.forEach(function(img){if(!img.hasAttribute('width')||!img.hasAttribute('height')){img.style.border='2px solid red';missing.push(img.src);}});if(missing.length&gt;0){var newTab=window.open();newTab.document.write('&lt;h1&gt;Images missing width and/or height:&lt;/h1&gt;&lt;ul&gt;');missing.forEach(function(url){newTab.document.write('&lt;li&gt;&lt;a href=&quot;'+url+'&quot; target=&quot;_blank&quot;&gt;'+url+'&lt;/a&gt;&lt;/li&gt;');});newTab.document.write('&lt;/ul&gt;');}else{alert('No images are missing width or height attributes.');}})();">DRAG ME 🡥</a>
+        </div>
+
+        <div class="bookmarklet">
+            <h2>Page speed Checker</h2>
+            <p>Uses the browser’s Performance API to list all resource requests (CSS, JS, images, etc.), showing both their transfer size (KB) and load time (ms).
+Also sums up total KB.</p>
+            <p>Useful for quick checks of page weight and heavy resources.</p>
+            <a
+                href="javascript:(function(){var entries=performance.getEntriesByType(&quot;resource&quot;);var totalSize=0;var report=&quot;Resource sizes (KB):\n\n&quot;;entries.forEach(function(e){var kb=(e.transferSize/1024).toFixed(1);totalSize+=parseFloat(kb);report+=e.name+&quot; - &quot;+kb+&quot; KB, &quot;+e.duration.toFixed(1)+&quot; ms\n&quot;;});report+=&quot;\nTotal size: &quot;+totalSize.toFixed(1)+&quot; KB&quot;;var w=window.open(&quot;&quot;,&quot;_blank&quot;);w.document.write(&quot;&lt;pre&gt;&quot;+report+&quot;&lt;/pre&gt;&quot;);})();">DRAG ME 🡥</a>
+        </div>
+
+        <div class="bookmarklet">
+            <h2>Schema JSON-LD checker</h2>
+            <p>Finds all <script type="application/ld+json"> blocks on the page, parses them, and pretty-prints the JSON.</p>
+            <p>Flags invalid JSON.</p>
+            <a
+                href="javascript:(function(){var scripts=document.querySelectorAll(&quot;script[type=&#39;application/ld+json&#39;]&quot;);if(!scripts.length){alert(&quot;No JSON-LD schema found.&quot;);return;}var output=&quot;&quot;;scripts.forEach(function(s,i){try{var json=JSON.parse(s.innerText);output+=&quot;Schema block &quot;+(i+1)+&quot;:\n&quot;+JSON.stringify(json,null,2)+&quot;\n\n&quot;;}catch(e){output+=&quot;Schema block &quot;+(i+1)+&quot;: Invalid JSON\n\n&quot;;}});var w=window.open(&quot;&quot;,&quot;_blank&quot;);w.document.write(&quot;&lt;pre style=&#39;white-space:pre-wrap;&#39;&gt;&quot;+output+&quot;&lt;/pre&gt;&quot;);})();
+">DRAG ME 🡥</a>
+        </div>
+
+        <div class="bookmarklet">
+            <h2>Link Extractor</h2>
+            <p>Extracts all links on the page, and prepares a CSV-style list (URL, link text).</p>
+            <p>Opens a popup you can copy/paste from.</p>
+            <a
+                href="javascript:(function(){var links=document.querySelectorAll(&quot;a[href]&quot;);var list=&quot;URL,Text\n&quot;;links.forEach(function(a){var text=a.innerText.trim().replace(/,/g,&quot; &quot;);list+=a.href+&quot;,&quot;+text+&quot;\n&quot;;});var w=window.open(&quot;&quot;,&quot;_blank&quot;);w.document.write(&quot;&lt;pre style=&#39;white-space:pre-wrap;&#39;&gt;&quot;+list+&quot;&lt;/pre&gt;&quot;);})();">DRAG ME 🡥</a>
+        </div>
 
     </div>
 
