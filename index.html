@@ -36,14 +36,14 @@
          }
          }
          .bookmarklet {
-         background-color: #e7f4e9;
-         border: 1px solid #4CAF50;
-         padding: 15px;
-         margin-bottom: 20px;
-         border-radius: 5px;
-         display: flex;
-         flex-direction: column;
-         justify-content: space-between;
+          background-color: #e7f4e9;
+          border: 1px solid #4CAF50;
+          padding: 15px;
+          margin-bottom: 20px;
+          border-radius: 5px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
          }
          .bookmarklet a {
          padding: 10px 15px;
@@ -53,6 +53,7 @@
          border-radius: 5px;
          margin-top: 10px;
          text-align: center;
+         margin-top: auto;
          }
          .bookmarklet a:hover {
          background-color: #45a049;
@@ -66,20 +67,6 @@
       </p>
       <p>Then, when you are on a webpage, click the bookmarklet in your bookmarks bar to activate it.</p>
       <div class="bookmarklets">
-         <div class="bookmarklet">
-            <h2>Bullet Checker</h2>
-            <p>Finds and highlights all <b>single bullet points</b> (lists with only one bullet). It will
-               scroll to the first one it finds and inform you how many were detected.
-            </p>
-            <a href="javascript:(function(){var foundSingleBullet=false;var lists=document.querySelectorAll('ul');var firstSingleBullet=null;var count=0;lists.forEach(function(ul){var listItems=ul.getElementsByTagName('li');if(listItems.length===1){foundSingleBullet=true;listItems[0].style.backgroundColor='yellow';count++;if(!firstSingleBullet){firstSingleBullet=listItems[0];}}});if(foundSingleBullet){firstSingleBullet.scrollIntoView({behavior:'smooth',block:'center'});alert('Found and highlighted ' + count + ' single bullet point(s). Scrolled to the first one.');}else{alert('No single bullet points found.');}})();">Bullet Checker</a>
-         </div>
-         <div class="bookmarklet">
-            <h2>Space Checker</h2>
-            <p>Highlights <b>links with a space at the end</b> of their text (ignoring navigation links or
-               image links). It will scroll to the first one found.
-            </p>
-            <a href="javascript:(function(){var links=document.querySelectorAll('a');var found=false;links.forEach(function(link){if(!link.closest('nav') && !link.querySelector('img')){var linkText=link.innerText||link.textContent;if(linkText.endsWith(' ')){link.style.backgroundColor='yellow';if(!found){link.scrollIntoView({behavior:'smooth',block:'center'});found=true;}}}});if(!found){alert('No links found with a space at the end of the link text.');}else{alert('Links with a space at the end of the link text have been highlighted.');}})();">Space Checker</a>
-         </div>
          <div class="bookmarklet">
             <h2>Sentence Checker</h2>
             <p>Finds <b>sentences that are longer than 30 words</b>, highlights them, scrolls down to the
@@ -149,6 +136,20 @@
             <p>Extracts all links on the page, and prepares a CSV-style list (URL, link text).</p>
             <p>Opens a popup you can copy/paste from.</p>
             <a href="javascript:(function(){var links=document.querySelectorAll(&quot;a[href]&quot;);var list=&quot;URL,Text\n&quot;;links.forEach(function(a){var text=a.innerText.trim().replace(/,/g,&quot; &quot;);list+=a.href+&quot;,&quot;+text+&quot;\n&quot;;});var w=window.open(&quot;&quot;,&quot;_blank&quot;);w.document.write(&quot;&lt;pre style=&#39;white-space:pre-wrap;&#39;&gt;&quot;+list+&quot;&lt;/pre&gt;&quot;);})();">Link Extractor</a>
+         </div>
+         <div class="bookmarklet">
+            <h2>Bullet Checker</h2>
+            <p>Finds and highlights all <b>single bullet points</b> (lists with only one bullet). It will
+               scroll to the first one it finds and inform you how many were detected.
+            </p>
+            <a href="javascript:(function(){var foundSingleBullet=false;var lists=document.querySelectorAll('ul');var firstSingleBullet=null;var count=0;lists.forEach(function(ul){var listItems=ul.getElementsByTagName('li');if(listItems.length===1){foundSingleBullet=true;listItems[0].style.backgroundColor='yellow';count++;if(!firstSingleBullet){firstSingleBullet=listItems[0];}}});if(foundSingleBullet){firstSingleBullet.scrollIntoView({behavior:'smooth',block:'center'});alert('Found and highlighted ' + count + ' single bullet point(s). Scrolled to the first one.');}else{alert('No single bullet points found.');}})();">Bullet Checker</a>
+         </div>
+         <div class="bookmarklet">
+            <h2>Space Checker</h2>
+            <p>Highlights <b>links with a space at the end</b> of their text (ignoring navigation links or
+               image links). It will scroll to the first one found.
+            </p>
+            <a href="javascript:(function(){var links=document.querySelectorAll('a');var found=false;links.forEach(function(link){if(!link.closest('nav') && !link.querySelector('img')){var linkText=link.innerText||link.textContent;if(linkText.endsWith(' ')){link.style.backgroundColor='yellow';if(!found){link.scrollIntoView({behavior:'smooth',block:'center'});found=true;}}}});if(!found){alert('No links found with a space at the end of the link text.');}else{alert('Links with a space at the end of the link text have been highlighted.');}})();">Space Checker</a>
          </div>
       </div>
 <footer style="margin-top:40px; padding:10px 0; text-align:center; font-size:0.9em; color:#666; border-top:1px solid #ddd;">
