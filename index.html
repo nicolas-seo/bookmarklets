@@ -13,7 +13,19 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Javascript Bookmarklets | By Nicolas Montanares</title>
+     <script>
+  const title = "Javascript Bookmarklets | By Nicolas Montanares";
+  let position = 0;
+  function scrollTitle() {
+    document.title = title.substring(position, title.length) + title.substring(0, position);
+    position++;
+    if (position > title.length) {
+      position = 0;
+    }
+    setTimeout(scrollTitle, 170);
+  }
+  scrollTitle();
+</script>
       <link rel="icon" href="https://nicolas-seo.github.io/bookmarklets/favicon.ico" sizes="32x32">
       <style>
          body {
